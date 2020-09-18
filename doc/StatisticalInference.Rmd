@@ -1,0 +1,323 @@
+---
+title: "Statistical Inference"
+output: html_notebook
+---
+
+Infer properties of an underlying probability distribution from data (c.f. descriptive statistics of sample only).
+
+## Models and assumptions
+
+- Fully parametric - e.g. GLM
+- Non-parametric - very few assumptions made about distibution with attempt to forecast
+  - e.g. every continuous probability distribution has a median
+  - ML - number of parameters (tree strucuture etc.) grows with training size
+- Semi-parametric - 'structural' and 'random variation' components - parametric and non-parametric.
+
+Model assumptions about the population must be correct for inference to be correct e.g. some regression depends on normality.
+Distributions of sample statistic e.g. sample mean often needs to be approximated. 
+Approximation error by [Kullback–Leibler divergence](https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence).
+
+Can quantify error of approximation with e.g. via with large samples CLT applies.
+[Asymptotic theory](https://en.wikipedia.org/wiki/Asymptotic_theory_(statistics)) on the convergence of 
+
+- [The reign of the p-value is over](https://royalsocietypublishing.org/doi/10.1098/rsbl.2019.0174)
+  1. Augment p-value with a confidence. What chance of false positive ?
+  2. Substitute p-value with Bayes-factor
+  3. AIC
+
+## Inference Paradigms
+
+### Bayes
+- For inference, construct a probability hypotheses (model parameters) and data $H,D$
+- Hypothesis probability from conditional belief probabilities is:
+- $P(H | D)=\frac{P(D | H)\cdot P(H)}{P(D)}$ where:
+  - $P(H)$ = probability on hypothesis space
+  - $P(D | H)$ = *likelihood* of data given hypothesis
+  - $P(D)$ = *marginal likelihood* of observed data
+  - $\frac {P(D | H)}{P(D)}$ - impact of $D$ on $P(H)$ - Bayes factor 
+
+### Frequentist
+- Probability space $T$ is binary with null and alternative hypotheses $T = \{H_o,H_a\}$
+- In the binary model space assume $P(H_o)=1$ to do the analysys i.e. $P = P(.|H_o=1)$
+
+## Inference Techniques
+
+### Maximum likelihood estimation
+
+- most probable Bayesian estimator given a uniform prior distribution on the parameters.
+
+#### Hypothesis Testing 
+
+- type 1 error (false positive) - $H_0$ is true and rejected (in tails)
+- type 2 error (false negative) - $H_0$ is false and not rejected
+- *significance level* $\alpha$ = Pr(type 1 error)
+- $\beta$ = Pr(type 2 error)
+
+- p-value = probability of this tail event - 2-sided or 1-sided
+  - $p_2(x) = 2\min\{P(X\leq x|H_0),P(X\geq x|H_0)\}$ - detects unlikely events in both tails (min select the less likely one).
+  - $p_r(x) = P(X\geq x|H_0)$ for right tail event
+  - $p_l(x) = P(X\leq x|H_0)$ for left tail event
+- how confidently we can reject $H_0$. For binary decision choose $\alpha$ first.
+- *contrast* with $\Pr(H_0|X)$ in [Bayesian hypothesis testing](https://en.wikipedia.org/wiki/Bayes_factor)
+- justifies the rejection of the null hypothesis (iff a-priori probability of null hypothesis is not high - weakness of p-value?)
+
+#### ANOVA
+
+[ANOVA](https://en.wikipedia.org/wiki/Analysis_of_variance) is based on [Law of total variance](https://en.wikipedia.org/wiki/Law_of_total_variance). X,Y defined on a probability space and Var(Y) finite, then Var(Y) decomposes into variance  "explained" (expectation of conditional variance) and "unexplained" (variance of conditional expectation):
+$$
+Var[Y] = E[Y^{2}]-E[Y]^{2} \\
+=E[Var[Y|X]+[E[Y|X]]^{2}]-[E[E[Y|X]]]^{2} \\
+=E[Var[Y|X]]+Var[E[Y|X]]
+$$
+
+- Experimenters also wish to limit Type II errors (false negatives). 
+- The rate of Type II errors depends largely on sample size (the rate is larger for smaller samples
+  significance level (when the standard of proof is high, the chances of overlooking a discovery are also high) 
+  and effect size (a smaller effect size is more prone to Type II error).
+- exploratory data analysis, an ANOVA employs an additive data decomposition, 
+  and its sums of squares indicate the variance of each component of the decomposition
+- mean squares, along with an F-test ... allow testing of a nested sequence of models
+- Closely related to the ANOVA is a linear model fit with coefficient estimates and standard errors.
+
+In the typical application of ANOVA, the null hypothesis is that all groups are random samples from the same population.
+
+
+
+[
+
+[](https://en.wikipedia.org/wiki/Lack-of-fit_sum_of_squares)
+- [F-test](https://en.wikipedia.org/wiki/F-test)
+- [Nested models](https://en.wikipedia.org/wiki/Statistical_model#Nested_models)
+https://statisticsbyjim.com/regression/interpret-f-test-overall-significance-regression/
+
+The F-test for overall significance has the following two hypotheses:
+
+The null hypothesis states that the model with no independent variables fits the data as well as your model.
+The alternative hypothesis says that your model fits the data better than the intercept-only model.
+
+
+- R-squared measures the strength of the relationship between your model and the dependent variable.
+- The F-test of overall significance is the hypothesis test for this relationship
+- https://statisticsbyjim.com/regression/model-specification-variable-selection/
+
+It’s fabulous if your regression model is statistically significant! However, check your residual plots to determine whether the results are trustworthy! And, learn how to choose the correct regression model!
+
+In cases of $(X,Y)$ where $E(Y\mid X)=aX+b$  explained component of the variance divided by the total variance:
+
+$$
+{Var(E(Y\mid X)) \over Var(Y)}=Corr(X,Y)^{2}
+$$
+
+
+
+### Linear models - Convergence and 
+
+- https://en.wikipedia.org/wiki/Goodness_of_fit
+- https://www.ibm.com/support/knowledgecenter/en/SSLVMB_26.0.0/statistics_mainhelp_ddita/spss/advanced/idh_bayesian_pearson.html
+- http://www.sumsar.net/blog/2013/08/bayesian-estimation-of-correlation **Get the R code !!**
+
+
+
+$$
+{\rho_{X,Y}= Corr(X,Y) = {Cov(X,Y) \over \sigma_{X}\sigma_{Y}} = { E[(X-\mu_{X})(Y-\mu_{Y})] \over \sigma_{X}\sigma _{Y}}}
+$$
+- If x andy are results of measurements that contain measurement error, limits on the correlation coefficient are not −1 to +1 but a smaller range
+- Correlation is symmetric
+-  
+- R2 is a statistic that will give some information about the goodness of fit of a model.
+
+$R^2$ gives the proportion of explained variance:
+$$
+SS_{\text{tot}}=\sum _{i}(y_{i}-{\bar {y}})^{2} \\ 
+SS_{\text{reg}}=\sum _{i}(f_{i}-{\bar {y}})^{2} \\
+SS_{\text{res}}=\sum _{i}(y_{i}-f_{i})^{2} \\
+SS_{\text{tot}} = SS_{\text{res}}+SS_{\text{reg}} \\
+R^2 = {SS_{reg} \over SS_{tot}} = 1-{SS_{res} \over SS_{tot}}
+$$
+
+
+
+[Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)
+
+
+[Regression dilution bias](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3410287/)
+
+[Fisher transform](https://en.wikipedia.org/wiki/Fisher_transformation)
+- an approximate variance-stabilizing transformation for r when X and Y follow a bivariate normal distribution
+- without the Fisher transformation, the variance of r grows smaller as |ρ| gets closer to 1. Since the Fisher transformation is approximately the identity function when |r| < 1/2, it is sometimes useful to remember that the variance of r is well approximated by 1/N as long as |ρ| is not too large and N is not too small. This is related to the fact that the asymptotic variance of r is 1 for bivariate normal data.
+
+A very good explanation of the obtaining confidence intervals of *Pearon's r* using
+Fisher's r-to-z transform can be found [here](http://faculty.washington.edu/gloftus/P317-318/Useful_Information/r_to_z/PearsonrCIs.pdf). 
+
+
+m$cortest
+
+- RSE - estimate of error distribution $sigma$
+
+- F-distribution with 1 and 148 degrees of freedom.
+- F-value is the same as $t^2$ for the slope (which is why the p values are the same)
+
+
+```
+
+Residual distriution - should be roughly symmetrical about a mendian close to 0, the 1Q and 3Q values should ideally be roughly similar values. WHY ?
+
+- estimate
+- stdderr
+- t-value - how many stddevs estimate away from zero
+- The p-value is the probability of achieving a |t| as large as or larger than the observed absolute t value 
+   if the null hypothesis H_0 $\rho = 0$. They are computed as (using tstats from above)
+- JAGS
+
+$$
+z_r \ = \  tanh^{-1} \ = \ 0.5 \log( \frac{1+r}{1-r} ) \ \ \sim \ \ N(0.5 \log(\frac{1+\rho}{1-\rho}), \sqrt{\frac{1}{n-3}})
+$$
+
+
+
+
+ Conclusion
+
+# References
+
+https://en.wikipedia.org/wiki/Statistical_inference
+- point and confidenc einterval estimate
+- fully parametric model
+- what distributional assumptions - approximation theory and functional analysis to quantify the error of approximation.[https://en.wikipedia.org/wiki/Asymptotic_theory_(statistics)]
+
+## Paradigm
+
+### Bayes
+- Compute with hypothesis probability.  conditional belief probabilities $ P(H | D)={\frac {P(D | H)\cdot P(H)}{P(D)}} $ where:
+- $P(H)$ = probability on hypothesis space
+- $P(D | H)$ = *likelihood* of data given hypothesis
+- $P(D)$ = *marginal likelihood* of observed data
+- $\frac {P(D | H)}{P(D)}$ - impact of D on P(H) - Bayes factor 
+
+### Frequentist
+- Tests of null hypothese H (althernative) $H_a$ with $P(H)=1$ which give the model probability P. 
+*think abut what probabilities we are talking about*
+- Compute the distribution of a statistic $X$ under $P(D|H)$ 
+- Compute $p[X,H](x)$ - the probability of X=x or more extreme under H:
+$\Pr(X\geq x|H)$ for right tail event,
+$\Pr(X\leq x|H)$ for left tail event,
+$2\min\{\Pr(X\leq x|H),\Pr(X\geq x|H)\}$ for double tail event.
+*not* $\Pr(H|X)$ as in [Bayesian hypothesis testing](https://en.wikipedia.org/wiki/Bayes_factor)
+
+- Choose a significance level $a$ - the probability of rejecting null hypothesis if true
+- $p-value$ - the (tail) probability that statistic is *larger* than this based on 
+
+
+
+Test of null hypothesis distribution against observed distribution - 
+
+https://www.ibm.com/support/knowledgecenter/en/SSLVMB_26.0.0/statistics_mainhelp_ddita/spss/advanced/idh_bayesian_pearson.html
+http://www.sumsar.net/blog/2013/08/bayesian-estimation-of-correlation **Get the R code !!**
+
+
+
+
+
+https://en.wikipedia.org/wiki/Null_hypothesis
+
+
+
+
+
+
+$$
+{\rho_{X,Y}= Corr(X,Y) = {Cov(X,Y) \over \sigma_{X}\sigma_{Y}} = { E[(X-\mu_{X})(Y-\mu_{Y})] \over \sigma_{X}\sigma _{Y}}}
+$$
+- If x andy are results of measurements that contain measurement error, limits on the correlation coefficient are not −1 to +1 but a smaller range
+- Correlation is symmetric
+-  
+- R2 is a statistic that will give some information about the goodness of fit of a model.
+
+$R^2$ gives the proportion of explained variance:
+$$
+SS_{\text{tot}}=\sum _{i}(y_{i}-{\bar {y}})^{2} \\ 
+SS_{\text{reg}}=\sum _{i}(f_{i}-{\bar {y}})^{2} \\
+SS_{\text{res}}=\sum _{i}(y_{i}-f_{i})^{2} \\
+SS_{\text{tot}} = SS_{\text{res}}+SS_{\text{reg}} \\
+R^2 = {SS_{reg} \over SS_{tot}} = 1-{SS_{res} \over SS_{tot}}
+$$
+
+[ANOVA](https://en.wikipedia.org/wiki/Analysis_of_variance) is based on [Law of total variance](https://en.wikipedia.org/wiki/Law_of_total_variance). X,Y defined on a probability space and Var(Y) finite, then Var(Y) decomposes into variance  "explained" (expectation of conditional variance) and "unexplained" (variance of conditional expectation):
+$$
+{\displaystyle \operatorname {Var} [Y] =E[Y^{2}]-E[Y]^{2}} \\
+=E\left[Var[Y\mid X]+[E[Y\mid X]]^{2}\right]-[E[E[Y\mid X]]]^{2} \\
+= E[Var[Y\mid X]]+Var[E[Y\mid X]]
+$$
+
+
+A statistically significant result, when a probability (p-value) is less than a pre-specified threshold (significance level), justifies the rejection of the null hypothesis, but only if the a priori probability of the null hypothesis is not high. In the typical application of ANOVA, the null hypothesis is that all groups are random samples from the same population.
+
+- By construction, hypothesis testing limits the rate of Type I errors (false positives) to a significance level. 
+- Experimenters also wish to limit Type II errors (false negatives). The rate of Type II errors depends largely on sample size (the rate is larger for smaller samples), significance level (when the standard of proof is high, the chances of overlooking a discovery are also high) and effect size (a smaller effect size is more prone to Type II error).
+-  exploratory data analysis, an ANOVA employs an additive data decomposition, and its sums of squares indicate the variance of each component of the decomposition
+- mean squares, along with an F-test ... allow testing of a nested sequence of models
+- Closely related to the ANOVA is a linear model fit with coefficient estimates and standard errors.[
+
+[](https://en.wikipedia.org/wiki/Lack-of-fit_sum_of_squares)
+- [F-test](https://en.wikipedia.org/wiki/F-test)
+- [Nested models](https://en.wikipedia.org/wiki/Statistical_model#Nested_models)
+https://statisticsbyjim.com/regression/interpret-f-test-overall-significance-regression/
+
+
+The F-test for overall significance has the following two hypotheses:
+
+The null hypothesis states that the model with no independent variables fits the data as well as your model.
+The alternative hypothesis says that your model fits the data better than the intercept-only model.
+
+
+- R-squared measures the strength of the relationship between your model and the dependent variable.
+- The F-test of overall significance is the hypothesis test for this relationship
+- https://statisticsbyjim.com/regression/model-specification-variable-selection/
+
+It’s fabulous if your regression model is statistically significant! However, check your residual plots to determine whether the results are trustworthy! And, learn how to choose the correct regression model!
+
+In cases of $(X,Y)$ where $E(Y\mid X)=aX+b$  explained component of the variance divided by the total variance:
+
+$$
+{Var(E(Y\mid X)) \over Var(Y)}=Corr(X,Y)^{2}
+$$
+
+
+
+[Pearson correlation coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)
+
+
+[Regression dilution bias](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3410287/)
+
+[Fisher transform](https://en.wikipedia.org/wiki/Fisher_transformation)
+- an approximate variance-stabilizing transformation for r when X and Y follow a bivariate normal distribution
+- without the Fisher transformation, the variance of r grows smaller as |ρ| gets closer to 1. Since the Fisher transformation is approximately the identity function when |r| < 1/2, it is sometimes useful to remember that the variance of r is well approximated by 1/N as long as |ρ| is not too large and N is not too small. This is related to the fact that the asymptotic variance of r is 1 for bivariate normal data.
+
+A very good explanation of the obtaining confidence intervals of *Pearon's r* using
+Fisher's r-to-z transform can be found [here](http://faculty.washington.edu/gloftus/P317-318/Useful_Information/r_to_z/PearsonrCIs.pdf). 
+
+
+m$cortest
+
+- RSE - estimate of error distribution $sigma$
+
+- F-distribution with 1 and 148 degrees of freedom.
+- F-value is the same as $t^2$ for the slope (which is why the p values are the same)
+
+
+```
+
+Residual distriution - should be roughly symmetrical about a mendian close to 0, the 1Q and 3Q values should ideally be roughly similar values. WHY ?
+
+- estimate
+- stdderr
+- t-value - how many stddevs estimate away from zero
+- The p-value is the probability of achieving a |t| as large as or larger than the observed absolute t value 
+   if the null hypothesis H_0 $\rho = 0$. They are computed as (using tstats from above)
+
+
+
+$$
+z_r \ = \  tanh^{-1} \ = \ 0.5 \log( \frac{1+r}{1-r} ) \ \ \sim \ \ N(0.5 \log(\frac{1+\rho}{1-\rho}), \sqrt{\frac{1}{n-3}})
+$$
+

@@ -1,0 +1,32 @@
+---
+title: "Probability Theory and Statistical Inference"
+output: html_notebook
+---
+
+# 9. Limit Theorems in Probability
+
+
+# 10. From Probability to Statistical Inference
+
+# Properties of Esimators
+
+
+# Methods of Estimation
+
+
+## Maximum Likelihod
+
+## Least Squares
+
+## Method of Moments
+
+# 13. Hypothesis Testing
+
+## Before Fisher
+
+## Fisher's significance testing
+
+
+
+
+

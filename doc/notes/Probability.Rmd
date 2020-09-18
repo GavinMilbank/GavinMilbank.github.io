@@ -1,0 +1,38 @@
+---
+title: "Probability Notes"
+header-includes:
+  - \usepackage()
+output: 
+  html_document: 
+    toc: true
+    theme: united
+    toc_depth: 1
+---
+
+
+# Learning Framework
+
+$ <x,y> \sim \rho $ predict y with $f(x)$ parameterised sub-class $f_w(x)$
+
+$$
+  f^{*}(x) \dot{=} E(y|x) = E_{<x,y> \sim \rho}(f_w(x)-y)^2 = E_{y|x}(y) 
+$$
+
+
+$$
+  \omega^{*} = argmin{\omega}
+$$
+
+
+# Probability
+
+## Convexity and Jensens Inequality
+
+$$ E(f(X)) \ge f(E(X)) $$ for convex $f$.
+
+## Co-variance Matrix
+
+$$
+C = E_x((x-\bar{x} ))
+$$
+

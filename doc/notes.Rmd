@@ -1,0 +1,82 @@
+# Data Description
+
+- standard errors 
+- comparing mean/variance
+  - mean - students-t
+  - variance - F-test
+- comparing distibutions
+  - discrete(binned) - Chi-Square Test
+  - continuous(single-var) - Kolmogorov-Smirnoff
+- measure of association (knowing one gives prediction advantage)
+  - strength(correlation value) vs significance(convergence)
+  - contingency table - (x,y) => count
+  - significance by chi-squared
+- linear correlation
+  - Pearson's - ignorant of individual distributions of x and y
+  - If the null hypothesis is that x and y are uncorrelated, and if the distributions for x and y each have enough convergent moments (“tails” die off sufficiently rapidly), and if N is large (typically> 500), then r is distributed approximately normally, with a mean of zero and a standard deviation of 1= N. In that case, the (double-sided) significance of the correlation, that is, the probability that jrj should be larger than its observed value in
+ the null hypothesis, is erfc(|r|sqrt(N/2))
+  - Most statistics books try to go beyond (14.5.2) and give additional statistical tests that can be made using r. In almost all cases, however, these tests are valid only for a very special class of hypotheses, namely that the distributions of x and y jointly form a binormal or two-dimensional Gaussian distribution around their mean values, with joint probability density
+  - Assuming a 2 dimensional binormal distribution
+    - t = r sqrt((N-2)/(1-r^2)) ~ StudentsT(N-2) under H_0 of r=0 => get 2-sided significance
+    - also 2 significantly different r's - Fishers z-transform
+    
+All of the significances above are two-sided. If you wish to disprove the null hypothesis in favor of a one-sided hypothesis, such as that r1 > r2 (where the sense of the inequality was decided a priori), then (i) if your measured r1 and r2 have the wrong sense, you have failed to demonstrate your one-sided hypothesis, but (ii) if they have the right ordering, you can multiply the significances given above by 0.5, which makes them more significant.
+But keep in mind: These interpretations of the r statistic can be completely meaningless if the joint probability distribution of your variables x and y is too different from a binormal distribution.
+
+- rank-correlation i.e. map Pr(x) => U(rank(x))
+  - spearman, kendall
+  
+## information theoretic
+## smoothing
+
+    
+# Data Modelling
+
+## Intro
+
+## Least Squeares as MLE
+
+## Fitting Straight Line
+
+- Chi-squared merit function
+- 
+
+
+  
+- goodness of fit == measure of convergence
+- In frequentist terms, we need to know the standard errors of the best-fit parameters. Alternatively, in Bayesian language, we want to find not just the peak of the joint parameter probability distribution, but the whole distribution. Or we at least want to be able to sample from that distribution, typically by Markov chain Monte Carlo 
+
+## Least Squares as MLE
+- chi^2 on weighted sum of squared residuals
+- Bayesian fall back to p-value tail stats like chi^2.
+
+
+We use 2-sided H_a
+
+null hypotheses
+
+In general we forma narrow null hypotheses which are easy to reject rather than 
+
+The relationship of the measurements of co-located Neph and BAM instruments are well described by a linear model with independent normally distribued errors in the *one* of the instruments (an analytic simplication). High chance of zero intercept and a correlation coefficient which does not appear to vary greatly with distance of the instruments from the target.
+
+
+- [Wiki OLS](https://en.wikipedia.org/wiki/Simple_linear_regression)
+- [Wiki errors in variables](https://en.wikipedia.org/wiki/Errors-in-variables_models)
+- [Wiki orthogonal regression](https://en.wikipedia.org/wiki/Deming_regression)
+
+In the case when some regressors have been measured with errors, estimation based on the standard assumption leads to inconsistent estimates, meaning that the parameter estimates do not tend to the true values even in very large samples.
+
+# Statistics
+
+[Pearson correlation](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)
+[Residual standard error]() `r{}  m$data$x`
+[Multiple R-squared]()
+
+$
+Std. Error
+$
+
+
+https://en.wikipedia.org/wiki/Student%27s_t-distribution
+
+
