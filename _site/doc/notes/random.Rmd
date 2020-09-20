@@ -1,0 +1,22 @@
+# ml-docs
+
+https://towardsdatascience.com/tagged/graphql
+https://www.datanami.com/2018/11/07/will-graphql-become-a-standard-for-the-new-data-economy/
+https://towardsdatascience.com/rapid-application-prototyping-using-graphql-a-different-way-of-thinking-about-your-data-and-api-f93faadad421
+https://hackersandslackers.com/interacting-with-your-graphql-api/
+
+
+- log-transform
+- lifecycle periods from launch date
+
+- y(s,t,u) = f(u-s) + g(t,u)
+
+f(u-s) = trend, capped, zero reverting  = normal product lifecyle - with learned initial level,slope ?
+g(t,u) = seasonal and public news shocks - `xgboost` - for u - use calendar week, week of month (the sunday falls in the week, truncate 5 to 4)
+
+
+- Now fit residuals additively
+
+- F(t-cal)
+- the define a F(t-cal)
+- COMPATIBILITY/SMOOTHNESS

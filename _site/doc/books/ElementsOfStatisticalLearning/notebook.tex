@@ -1,0 +1,1600 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ElementsOfStatisticalLearning}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{pylabtools} \PY{k}{import} \PY{n}{figsize}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{matplotlib} \PY{k}{import} \PY{n}{pyplot} \PY{k}{as} \PY{n}{plt}
+         \PY{n}{figsize}\PY{p}{(}\PY{l+m+mi}{11}\PY{p}{,} \PY{l+m+mi}{9}\PY{p}{)}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+         \PY{k+kn}{import} \PY{n+nn}{math}
+\end{Verbatim}
+
+
+    \section{2. Overview of Supervised
+Learning}\label{overview-of-supervised-learning}
+
+\subsection{2.3 Prediction Least Squares to Nearest
+Neighbors}\label{prediction-least-squares-to-nearest-neighbors}
+
+\subsubsection{2.3.1 Linear Models and Least
+Squares}\label{linear-models-and-least-squares}
+
+\begin{itemize}
+\tightlist
+\item
+  N factors = N dim linear model = N+1 coefficient if bias included.
+\item
+  invert : min(Norm(predictions(sample)-outcomes),coefficients)
+\end{itemize}
+
+\subsubsection{2.3.2 Nearest-Neighbor
+Methods}\label{nearest-neighbor-methods}
+
+\begin{itemize}
+\tightlist
+\item
+  simple average of nearest K (e.g. euclidean norm)
+\item
+  1-NN =\textgreater{} voronoi tesselation
+\end{itemize}
+
+\subsubsection{2.3.3 From Least Squares to Nearest
+Neighbors}\label{from-least-squares-to-nearest-neighbors}
+
+\begin{itemize}
+\tightlist
+\item
+  LLS == low variance high bias - best for linear real models
+\item
+  kNN == high variance low bias - fits any real model
+\item
+  kNN and linear regression have biggest market share.
+\item
+  kNN can be smoothed with kernels, perhaps assymetric
+\item
+  kNN enhanced by kernel method weighting (different in different
+  dimensions)
+\item
+  LLS enhanced by weighting, basis functions, non-linear transformation
+  of linear function : NN, projection pursuit.
+\end{itemize}
+
+\subsection{2.4 Statistical Decision
+Theory}\label{statistical-decision-theory}
+
+\begin{itemize}
+\tightlist
+\item
+  in input space X, output space Y with joint distribution Pr(X,Y)
+\item
+  estimate a \emph{prediction function} \(f:X \Rightarrow Y\)
+\item
+  \emph{loss function} L(Y,f(X)) usually L2-norm : \$ (Y -
+  F(X))\^{}\{2\} \$\\
+\item
+  \emph{expected prediction error} \$ EPE(f)= E\_\{X,Y\}(Y-f(X))\^{}2 =
+  E\_\{X\}E\_\{X\textbar{}Y\}((Y-f(X))\^{}\{2\}\textbar{}X) =
+  \int\textbar{}y-f(x)\textbar{}\^{}\{2\}Pr(dx,dy)\$
+\item
+  \href{http://math.tntech.edu/machida/4470/booklet/booklet/node21.html}{conditional
+  expectation} is the best (minimizing pointwise) prediction function
+  under L2-norm.
+\item
+  \$ f(x) = argmin\_\{c\} E\_\{X\textbar{}Y\}((Y -
+  f(X))\^{}\{2\}\textbar{}X) = E(Y\textbar{}X = x) \$
+\item
+  many methods to calculated this expectation
+\item
+  integrate Y over the conditional distribution \(E(Y|X)\)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \$ \hat{f}(x) = \int f(y) Pr(dy\textbar{}x) \$
+  \item
+    e.g.
+    \href{https://en.wikipedia.org/wiki/Valuation_of_options\#Pricing_models}{financial
+    derivatives valuation (under risk neutral probability)} or
+    \href{https://en.wikipedia.org/wiki/Real_options_valuation}{real
+    option valuation(under objective probability)}
+  \item
+    but there are simpler (short-cut) predictors which don't model the
+    marginal distribution Pr(Y\textbar{}X) even theoretically in the way
+    that the Black-Scholes "expiry price (Y) predictor" does in the
+    derivation of it's formula ( even though it might not be obvious
+    using the formula.)\\
+  \end{itemize}
+\item
+  \textbf{k-nearest neighbour} approximates conditional expectation by
+  local(\textasciitilde{}conditioned)
+  average(\textasciitilde{}expecation)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \$ \hat{f}(x) = Ave(y\_\{i\}\textbar{} x\_\{i\} \in N\_\{k\}(x) ) \$
+  \item
+    under mild regularity of Pr(X,Y)
+    \href{http://cseweb.ucsd.edu/~dasgupta/papers/nn-rates.pdf}{can
+    show} \(N,k\to\infty\) , \(k/N\to0\) , \(\hat{f}(x) \to E(Y|X=x)\)
+  \item
+    good for locally constant function
+  \item
+    curse of dimensionality reduces the above rate of convergence
+  \end{itemize}
+\item
+  \textbf{linear regression} assumes predictor is linear \$ f(x)
+  \approx x\^{}\{T\} \beta \$
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \$ \beta = ( E( X X\^{}T ) )\^{}\{-1\} E(XY) \$
+  \item
+    \emph{not} conditioning on X but polling values over X
+  \end{itemize}
+\item
+  categorical output variable G
+\item
+  loss function is K x K matrix (often choose 0-1) L(k,l)=cost of
+  classifying G\_\{k\} as G\_\{l\}
+\item
+  \$ EPE = E{[}L(G,\hat{G}(X)){]} = E\_\{X\}
+  \Sigma\^{}\{K\}\emph{\{k=1\} L{[}G\_\{k\},\hat{G}(X) {]} Pr ( G}\{k\}
+  \textbar{} X ) \$
+\item
+  \emph{classification function}: \$ \hat{G}(x) = argmin\_\{g
+  \in \mathcal{G} \} \Sigma\^{}\{K\}\emph{\{k=1\} L{[}G\_\{k\},g{]}
+  Pr(G}\{k\}\textbar{}X=x)\$
+
+  \begin{itemize}
+  \tightlist
+  \item
+    zero-one loss function gives the \textbf{Bayes classifier}
+  \item
+    \$ \hat{G}(x) = argmin\_\{g
+    \in \mathcal{G}\}{[}1-Pr(g\textbar{}X=x){]} \$
+  \item
+    \$ \hat{G}(x) = \mathcal{G}\emph{\{k\} if
+    Pr(\mathcal{G}}\{k\}\textbar{}X=x) = \max\_\{g \in \mathcal{G}\}
+    Pr(g\textbar{}X=x) \$
+  \item
+    the most probable class using conditional discrete distrbution.
+  \item
+    dummy-variable regression procedure then classification to the
+    largest fitted value, is another way of representing Bayes
+    classifier
+  \end{itemize}
+\end{itemize}
+
+\subsection{2.5 Local Methods in High
+Dimensions}\label{local-methods-in-high-dimensions}
+
+\begin{itemize}
+\tightlist
+\item
+  stable but biased linear model, or less stable but less biased kNN.
+\item
+  with large enough N can approximate expectation with kNN.
+\item
+  curse of dimensionality
+\item
+  edge length for fraction \emph{r} of unit cube :
+  \(e_{p}(r) = r^{1/p}\)
+\item
+  reducing r increases variance
+\item
+  sampling density \(\alpha\text{ }N^{1/p}\) =\textgreater{} in high
+  diensions training smaples sparsely populate input space.
+\item
+  compute expected prediction error \[
+  \begin{align} 
+  MSE(x_{0}) &= E_{\mathcal{T}}[f(x_{0}) - \hat{y_{0}}]^{2} \\
+  &= E_{\mathcal{T}}[\hat{y_{0}} - E_{\mathcal{T}}(\hat{y_{0}})]^{2} + E_{\mathcal{T}}[E_{\mathcal{T}}(\hat{y_{0}}) - f(x_{0})]^{2} \\
+  &= Var_{\mathcal{T}}(\hat{y_{0}}) - {Bias}^{2}(\hat{y_{0}})
+  \end{align}
+  \]
+\item
+  as dimension increases, nearest neighbourhood of a point at certin of
+  domain increases a lot.
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y vs X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}autoscaley\PYZus{}on}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{o}{*}\PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1\PYZhy{}NN in one dimension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}autoscaley\PYZus{}on}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1\PYZhy{}NN in one vs two dimension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}autoscaley\PYZus{}on}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{distance to 1\PYZhy{}NN vs dimension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}autoscaley\PYZus{}on}\PY{p}{(}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{y} \PY{o}{=} \PY{n}{x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{3}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MSE vs dimension}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} [<matplotlib.lines.Line2D at 0x1a19ebc048>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_2_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{2.6 Statistical Models, Supervised Learning and Function
+Approximation}\label{statistical-models-supervised-learning-and-function-approximation}
+
+\subsubsection{2.6.1 A Statistical Model for the Joint Distribution
+Pr(X,Y)}\label{a-statistical-model-for-the-joint-distribution-prxy}
+
+\subsubsection{2.6.2 Supervised Learning}\label{supervised-learning}
+
+\subsubsection{2.6.3 Function
+Approximation}\label{function-approximation}
+
+\subsection{2.7 Structured Regression
+Models}\label{structured-regression-models}
+
+\subsubsection{2.7.1 Difficulty of the
+Problem}\label{difficulty-of-the-problem}
+
+\subsection{2.8 Classes of Restricted
+Estimators}\label{classes-of-restricted-estimators}
+
+\subsubsection{2.8.1 Roughness Penalty and Bayesian
+Methods}\label{roughness-penalty-and-bayesian-methods}
+
+\subsubsection{2.8.2 Kernel Methods and Local
+Regression}\label{kernel-methods-and-local-regression}
+
+\subsubsection{2.8.3 Basis Functions and Dictionary
+Methods}\label{basis-functions-and-dictionary-methods}
+
+\subsection{2.9 Model Selection and the Bias--Variance
+Tradeoff}\label{model-selection-and-the-biasvariance-tradeoff}
+
+    \section{3 Linear Methods for
+Regression}\label{linear-methods-for-regression}
+
+\subsection{3.1 Introduction}\label{introduction}
+
+\subsection{3.2 Linear Regression Models and Least
+Squares}\label{linear-regression-models-and-least-squares}
+
+\subsubsection{3.2.1 Example: Prostate
+Cancer}\label{example-prostate-cancer}
+
+\subsubsection{3.2.2 The Gauss--Markov
+Theorem}\label{the-gaussmarkov-theorem}
+
+\subsubsection{3.2.3 Multiple Regression from Simple Univariate
+Regression}\label{multiple-regression-from-simple-univariate-regression}
+
+\subsubsection{3.2.4 Multiple Outputs}\label{multiple-outputs}
+
+\subsection{3.3 Subset Selection}\label{subset-selection}
+
+\subsubsection{3.3.1 Best-Subset Selection}\label{best-subset-selection}
+
+\subsubsection{3.3.2 Forward- and Backward-Stepwise
+Selection}\label{forward--and-backward-stepwise-selection}
+
+\subsubsection{3.3.3 Forward-Stagewise
+Regression}\label{forward-stagewise-regression}
+
+\subsubsection{3.3.4 Prostate Cancer Data Example
+(Continued)}\label{prostate-cancer-data-example-continued}
+
+\subsection{3.4 Shrinkage Methods}\label{shrinkage-methods}
+
+\subsubsection{3.4.1 Ridge Regression}\label{ridge-regression}
+
+\subsubsection{3.4.2 The Lasso}\label{the-lasso}
+
+\subsubsection{3.4.3 Discussion: Subset Selection, Ridge Regression and
+the
+Lasso}\label{discussion-subset-selection-ridge-regression-and-the-lasso}
+
+\subsubsection{3.4.4 Least Angle
+Regression}\label{least-angle-regression}
+
+\subsection{3.5 Methods Using Derived Input
+Directions}\label{methods-using-derived-input-directions}
+
+\subsubsection{3.5.1 Principal Components
+Regression}\label{principal-components-regression}
+
+\subsubsection{3.5.2 Partial Least Squares}\label{partial-least-squares}
+
+\subsection{3.6 Discussion: A Comparison of the Selection and Shrinkage
+Methods}\label{discussion-a-comparison-of-the-selection-and-shrinkage-methods}
+
+\subsection{3.7 Multiple Outcome Shrinkage and
+Selection}\label{multiple-outcome-shrinkage-and-selection}
+
+\subsection{3.8 More on the Lasso and Related Path
+Algorithms}\label{more-on-the-lasso-and-related-path-algorithms}
+
+\subsubsection{3.8.1 Incremental Forward Stagewise
+Regression}\label{incremental-forward-stagewise-regression}
+
+\subsubsection{3.8.2 Piecewise-Linear Path
+Algorithms}\label{piecewise-linear-path-algorithms}
+
+\subsubsection{3.8.3 The Dantzig Selector}\label{the-dantzig-selector}
+
+\subsubsection{3.8.4 The Grouped Lasso}\label{the-grouped-lasso}
+
+\subsubsection{3.8.5 Further Properties of the
+Lasso}\label{further-properties-of-the-lasso}
+
+\subsubsection{3.8.6 Pathwise Coordinate
+Optimization}\label{pathwise-coordinate-optimization}
+
+\subsection{3.9 Computational
+Considerations}\label{computational-considerations}
+
+    \section{4 Linear Methods for
+Classification}\label{linear-methods-for-classification}
+
+\subsection{4.1 Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item
+  partition \(G(x)\) into regions with linear decision boundaries
+\item
+  classify to largest discriminant \(f_{k}(x)\) interpreted as
+  \emph{posterior probability} Pr(G=k∣X=x)
+\item
+  we only require a \textbf{montone transform of Pr(G=k∣X=x) to be
+  linear}
+\item
+  e.g. with transform \(Logit(p)=log(p/(1-p))=\beta_{0}+\beta^{T}x\)
+\item
+  \$ Pr(G=1\textbar{}X=x) =
+  \frac{exp(\beta_{0}+\beta^{T}x)}{1+exp(\beta_{0}+\beta^{T}x)} \$
+\item
+  linear decision boundary \$ \beta\_\{0\}+\beta\^{}\{T\}x = 0 \$
+\item
+  explicitly model the linear boundary.
+\item
+  Rosenblatt \textbf{perceptron} - find separating hyperplane in
+  training data
+\item
+  or Vapnik \textbf{optimally separating hyperplane}
+\item
+  generalizations
+\item
+  expand variable set with p(p+1)/2 squares and cross-products
+\item
+  any non-linear any basis transformation
+\end{itemize}
+
+\subsection{4.2 Linear Regression of an Indicator
+Matrix}\label{linear-regression-of-an-indicator-matrix}
+
+\begin{itemize}
+\tightlist
+\item
+  \emph{y} - K class as binay (0,1) k-vector
+\item
+  \emph{Y} - N x K indicator response matrix
+\item
+  \emph{X} - N x (p+1) model matrix, (p inputs + column of 1's for
+  constant term)
+\item
+  \emph{B} - train (p+1) x K coefficient matrix \$ B =
+  (X\textsuperscript{\{T\}X)}\{-1\}X\^{}\{T\}Y \$
+\item
+  predict indicator K-vector \$ \hat{f}(x) = {[}(1,x)B{]}\^{}\{T\} \$
+\item
+  classify to class k with largest \(\hat{f}_{k}\)
+\item
+  \$ \hat{G}(x) = \{ argmax \}\emph{\{k \in \mathcal{G} \}
+  \{\hat{f}}\{k\}\}(x) \$
+\item
+  view \(\hat{f}(x)\) as estimate of \$ E(Y\_\{k\}∣X=x)=Pr(G=k∣X=x)\$
+\item
+  use non-linear basis functions for consistent probabilities
+\item
+  add more basis functions so that we approach conditional expectation
+\item
+  closest target classification allows probability to sum to one
+\item
+  fit linear model directly minimizing over all B
+\item
+  the class is given by the \(t_{k}\) closest to \(\hat{f}(x)\) from B
+  above.\\
+\item
+  because of rigid nature of regression some classes mask others when K
+  \textgreater{}\textgreater{} p
+\end{itemize}
+
+\subsection{4.3 Linear Discriminant
+Analysis}\label{linear-discriminant-analysis}
+
+\begin{itemize}
+\tightlist
+\item
+  for optimal classificaton we need class posteriors
+\item
+  \(f_{k}\) is class conditional density of X in class G=k
+\item
+  \(\pi_{k}\) is
+  \href{https://en.wikipedia.org/wiki/Prior_probability}{prior
+  probability} of class k
+\item
+  Pr(G=k\textbar{}X=x) from priors and class conditional via Bayes
+  theorem
+\item
+  techniques are based on models for the class densities
+\item
+  linear and quadratic discriminant analysis use Gaussian densities
+\item
+  mixtues of Gaussians allow nonlinar decsion boundaries (6.8)
+\item
+  most flexible are non-parametric densities
+\item
+  \textbf{Naive Bayes} assume inputs are conditionally independent in
+  each class
+
+  \begin{itemize}
+  \tightlist
+  \item
+    i.e. class densities are products of marginal densities
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{4.3.1 Regularized Discriminant
+Analysis}\label{regularized-discriminant-analysis}
+
+\subsubsection{4.3.2 Computations for LDA}\label{computations-for-lda}
+
+\subsubsection{4.3.3 Reduced-Rank Linear Discriminant
+Analysis}\label{reduced-rank-linear-discriminant-analysis}
+
+\subsection{4.4 Logistic Regression}\label{logistic-regression}
+
+\subsubsection{4.4.1 Fitting Logistic Regression
+Models}\label{fitting-logistic-regression-models}
+
+\subsubsection{4.4.3 Quadratic Approximations and
+Inference}\label{quadratic-approximations-and-inference}
+
+\subsubsection{4.4.4 L1 Regularized Logistic
+Regression}\label{l1-regularized-logistic-regression}
+
+\subsubsection{4.4.5 Logistic Regression or LDA
+?}\label{logistic-regression-or-lda}
+
+\begin{itemize}
+\item
+  the log-posterior odds between class k and K due to Gaussian class
+  densities.
+\item
+\end{itemize}
+
+\subsection{4.5 Separating Hyperplanes}\label{separating-hyperplanes}
+
+\subsubsection{4.5.1 Rosenblatt's Perceptron Learning
+Algorithm}\label{rosenblatts-perceptron-learning-algorithm}
+
+\subsection{4.5.2 Optimal Separating
+Hyperplanes}\label{optimal-separating-hyperplanes}
+
+    \section{5 Basis Expansions and
+Regularization}\label{basis-expansions-and-regularization}
+
+\subsection{5.1 Introduction}\label{introduction}
+
+\subsubsection{5.2 Piecewise Polynomials and
+Splines}\label{piecewise-polynomials-and-splines}
+
+\subsubsection{5.2.1 Natural Cubic Splines}\label{natural-cubic-splines}
+
+\subsubsection{5.2.2 Example: South African Heart Disease
+(Continued)}\label{example-south-african-heart-disease-continued}
+
+\subsubsection{5.2.3 Example: Phoneme
+Recognition}\label{example-phoneme-recognition}
+
+\subsection{5.3 Filtering and Feature
+Extraction}\label{filtering-and-feature-extraction}
+
+\subsection{5.4 Smoothing Splines}\label{smoothing-splines}
+
+\subsubsection{5.4.1 Degrees of Freedom and Smoother
+Matrices}\label{degrees-of-freedom-and-smoother-matrices}
+
+\subsection{5.5 Automatic Selection of the Smoothing
+Parameters}\label{automatic-selection-of-the-smoothing-parameters}
+
+\subsubsection{5.5.1 Fixing the Degrees of
+Freedom}\label{fixing-the-degrees-of-freedom}
+
+\subsubsection{5.5.2 The Bias--Variance
+Tradeoff}\label{the-biasvariance-tradeoff}
+
+\subsection{5.6 Nonparametric Logistic
+Regression}\label{nonparametric-logistic-regression}
+
+\subsection{5.7 Multidimensional
+Splines}\label{multidimensional-splines}
+
+\subsection{5.8 Regularization and Reproducing Kernel Hilbert
+Spaces}\label{regularization-and-reproducing-kernel-hilbert-spaces}
+
+\subsubsection{5.8.1 Spaces of Functions Generated by
+Kernels}\label{spaces-of-functions-generated-by-kernels}
+
+\subsubsection{5.8.2 Examples of RKHS}\label{examples-of-rkhs}
+
+\subsection{5.9 Wavelet Smoothing}\label{wavelet-smoothing}
+
+\subsubsection{5.9.1 Wavelet Bases and the Wavelet
+Transform}\label{wavelet-bases-and-the-wavelet-transform}
+
+\subsubsection{5.9.2 Adaptive Wavelet
+Filtering}\label{adaptive-wavelet-filtering}
+
+\subsection{Appendix: Computational Considerations for
+Splines}\label{appendix-computational-considerations-for-splines}
+
+\subsection{Appendix: B-splines}\label{appendix-b-splines}
+
+\subsection{Appendix: Computations for Smoothing
+Splines}\label{appendix-computations-for-smoothing-splines}
+
+    \section{6 Kernel Smoothing Methods}\label{kernel-smoothing-methods}
+
+\subsection{6.1 One-Dimensional Kernel
+Smoothers}\label{one-dimensional-kernel-smoothers}
+
+\subsubsection{6.1.1 Local Linear
+Regression}\label{local-linear-regression}
+
+\subsubsection{6.1.2 Local Polynomial
+Regression}\label{local-polynomial-regression}
+
+\subsection{6.2 Selecting the Width of the
+Kernel}\label{selecting-the-width-of-the-kernel}
+
+\subsection{6.3 Local Regression in
+R\^{}p}\label{local-regression-in-rp}
+
+\subsection{6.4 Structured Local Regression Models in
+R\^{}p}\label{structured-local-regression-models-in-rp}
+
+\subsubsection{6.4.1 Structured Kernels}\label{structured-kernels}
+
+\subsubsection{6.4.2 Structured Regression
+Functions}\label{structured-regression-functions}
+
+\subsection{6.5 Local Likelihood and Other
+Models}\label{local-likelihood-and-other-models}
+
+\subsection{6.6 Kernel Density Estimation and
+Classification}\label{kernel-density-estimation-and-classification}
+
+\subsubsection{6.6.1 Kernel Density
+Estimation}\label{kernel-density-estimation}
+
+\subsubsection{6.6.2 Kernel Density
+Classification}\label{kernel-density-classification}
+
+\subsubsection{6.6.3 The Naive Bayes
+Classifier}\label{the-naive-bayes-classifier}
+
+\subsection{6.7 Radial Basis Functions and
+Kernels}\label{radial-basis-functions-and-kernels}
+
+\subsection{6.8 Mixture Models for Density Estimation and
+Classification}\label{mixture-models-for-density-estimation-and-classification}
+
+\subsection{6.9 Computational
+Considerations}\label{computational-considerations}
+
+    \section{9 Additive Models, Trees, and Related
+Methods}\label{additive-models-trees-and-related-methods}
+
+\subsection{9.1 Generalized Additive
+Models}\label{generalized-additive-models}
+
+\subsubsection{9.1.1 Fitting Additive
+Models}\label{fitting-additive-models}
+
+\subsubsection{9.1.2 Example: Additive Logistic
+Regression}\label{example-additive-logistic-regression}
+
+\subsubsection{9.1.3 Summary}\label{summary}
+
+\subsection{9.2 Tree-Based Methods}\label{tree-based-methods}
+
+\subsubsection{9.2.1 Background}\label{background}
+
+\subsubsection{9.2.2 Regression Trees}\label{regression-trees}
+
+\subsubsection{9.2.3 Classification Trees}\label{classification-trees}
+
+\subsubsection{9.2.4 Other Issues}\label{other-issues}
+
+\subsubsection{9.2.5 Spam Example
+(Continued)}\label{spam-example-continued}
+
+\subsection{9.3 PRIM: Bump Hunting}\label{prim-bump-hunting}
+
+\subsubsection{9.3.1 Spam Example
+(Continued)}\label{spam-example-continued-1}
+
+\subsection{9.4 MARS: Multivariate Adaptive Regression
+Splines}\label{mars-multivariate-adaptive-regression-splines}
+
+\subsubsection{9.4.1 Spam Example
+(Continued)}\label{spam-example-continued-2}
+
+\subsubsection{9.4.2 Example (Simulated
+Data)}\label{example-simulated-data}
+
+\subsubsection{9.4.3 Other Issues}\label{other-issues-1}
+
+\subsection{9.5 Hierarchical Mixtures of
+Expert}\label{hierarchical-mixtures-of-expert}
+
+\subsection{9.6 Missing Data}\label{missing-data}
+
+\subsection{9.7 Computational
+Considerations}\label{computational-considerations}
+
+    \section{10 Boosting and Additive
+Trees}\label{boosting-and-additive-trees}
+
+\subsection{10.1 Boosting Methods}\label{boosting-methods}
+
+\subsubsection{10.1.1 Outline of This
+Chapter}\label{outline-of-this-chapter}
+
+\subsection{10.2 Boosting Fits an Additive
+Model}\label{boosting-fits-an-additive-model}
+
+\subsection{10.3 Forward Stagewise Additive
+Modeling}\label{forward-stagewise-additive-modeling}
+
+\subsection{10.4 Exponential Loss and
+AdaBoost}\label{exponential-loss-and-adaboost}
+
+\subsection{10.5 Why Exponential Loss?}\label{why-exponential-loss}
+
+\subsection{10.6 Loss Functions and
+Robustness}\label{loss-functions-and-robustness}
+
+\subsection{10.7 ``Off-the-Shelf'' Procedures for Data
+Mining}\label{off-the-shelf-procedures-for-data-mining}
+
+\subsection{10.8 Example: Spam Data}\label{example-spam-data}
+
+\subsection{10.9 Boosting Trees}\label{boosting-trees}
+
+\subsection{10.10 Numerical Optimization via Gradient
+Boosting}\label{numerical-optimization-via-gradient-boosting}
+
+\subsubsection{10.10.1 Steepest Descent}\label{steepest-descent}
+
+\subsubsection{10.10.2 Gradient Boosting}\label{gradient-boosting}
+
+\subsubsection{10.10.3 Implementations of Gradient
+Boosting}\label{implementations-of-gradient-boosting}
+
+\subsection{10.11 Right-Sized Trees for
+Boosting}\label{right-sized-trees-for-boosting}
+
+\subsection{10.12 Regularization}\label{regularization}
+
+\subsubsection{10.12.1 Shrinkage}\label{shrinkage}
+
+\subsubsection{10.12.2 Subsampling}\label{subsampling}
+
+\subsection{10.13 Interpretation}\label{interpretation}
+
+\subsubsection{10.13.1 Relative Importance of Predictor
+Variables}\label{relative-importance-of-predictor-variables}
+
+\subsubsection{10.13.2 Partial Dependence
+Plots}\label{partial-dependence-plots}
+
+\subsection{10.14 Illustrations}\label{illustrations}
+
+\subsubsection{10.14.1 California Housing}\label{california-housing}
+
+\subsubsection{10.14.2 New Zealand Fish}\label{new-zealand-fish}
+
+\subsubsection{10.14.3 Demographics Data}\label{demographics-data}
+
+    \section{11 Neural Networks}\label{neural-networks}
+
+\subsection{11.1 Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item
+  extract linear combinations of the inputs as derived features, and
+  then model the target as a nonlinear function of these features.
+\end{itemize}
+
+\subsection{11.2 Projection Pursuit
+Regression}\label{projection-pursuit-regression}
+
+\begin{itemize}
+\tightlist
+\item
+  basic PPR model is \$ f(X) = \sum\emph{\{m=1\}\^{}\{M\}
+  g}\{m\}(\omega\_\{m\}\^{}\{T\}X) \$
+\item
+  \$ \omega\_\{m\} \$ are unit vectors
+\item
+  \$ g\_\{m\}(\omega\_\{m\}\^{}\{T\}X) \$ is called a \emph{ridge
+  function}
+\item
+  class of non-linear function of linear combinations is very large
+
+  \begin{itemize}
+  \tightlist
+  \item
+    e.g. \$ X\_\{1\} . X\_\{2\} = {[} ( X\_\{1\}+X\_\{2\})\^{}2 -
+    (X\_\{1\}-X\_\{2\})\^{}2 {]}/4 \$
+  \end{itemize}
+\item
+  if M arbitrarily large, PPR functions are a \emph{universal
+  approximator} in \$ R\^{}\{N\} \$
+\item
+  but interepratation is difficult because of how inputs enter the model
+  (aprt from M=1).
+\item
+  fit by minimizing \$ \sum\_\{i=1\}\^{}\{N\} {[} y\_\{i\} -
+  \sum\emph{\{m=1\}\^{}\{M\} g}\{m\}(\omega\emph{\{m\}\^{}\{T\}x}\{i\})
+  {]} \$
+\item
+  constrain \$ g\_\{m\} \$ to overvoid overfitting
+\item
+  one dimensional smoothing such as spline on \$ v\_\{i\} =
+  \omega\^{}\{T\} x\_\{i\} \$, solving for \(\omega^{T}\) and g
+  simultaneously
+\item
+  important implementation details in the \$ \omega\^{}\{T\} and g \$
+  iteration
+
+  \begin{itemize}
+  \tightlist
+  \item
+    good if smoothing method has derivatives e.g. spline
+  \item
+    at each step can readjust the \(g_{m}\) from previous step
+  \item
+    usually \$ \omega\_\{m\} \$ are nto readjusted
+  \item
+    M usually estimated in forward stage-wise
+
+    \begin{itemize}
+    \tightlist
+    \item
+      top adding terms when fit not improved
+    \item
+      or use cross-validation
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\subsection{11.3 Neural Networks}\label{neural-networks-1}
+
+\begin{itemize}
+\tightlist
+\item
+  vanilla NN == single hiddlen layer back propagation == single layer
+  perceptron
+\item
+  \$ f\_\{k\}(X) = g\_\{k\}(T), k = 1,..,K \$
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \$ T\_\{k\} = \beta\emph{\{0k\} + \beta\^{}\{T\}}\{k\}Z , k = 1,..,K
+    \$
+  \item
+    \$ Z\_\{m\} = \sigma(\alpha\emph{\{0m\} + \alpha\^{}\{T\}}\{m\}X), m
+    = 1,..,M \$
+
+    \begin{itemize}
+    \tightlist
+    \item
+      basis expansion of X
+    \end{itemize}
+  \end{itemize}
+\item
+  activation function
+
+  \begin{itemize}
+  \tightlist
+  \item
+    sigmoid \$ 1/(1 + e\^{}\{-v\}) \$
+  \end{itemize}
+\item
+  \$ g\_\{k\}(T) \$
+
+  \begin{itemize}
+  \tightlist
+  \item
+    for classifcation use \$ g\_\{k\}(T) =
+    \frac{e^{T_{k}}}{ \sum_{l=1}^{K} e^{T_{k}} } \$
+  \end{itemize}
+\item
+  if \$ \sigma \$ is identity then whole model is linear
+\item
+  rate of activation depends on \$ \textbar{} \alpha\_\{m\} \textbar{}
+  \$
+\end{itemize}
+
+\subsection{11.4 Fitting Neural Networks}\label{fitting-neural-networks}
+
+\subsection{11.5 Some Issues in Training Neural
+Networks}\label{some-issues-in-training-neural-networks}
+
+\subsubsection{11.5.1 Starting Values}\label{starting-values}
+
+\subsubsection{11.5.2 Overfitting}\label{overfitting}
+
+\subsubsection{11.5.3 Scaling of the
+Inputs}\label{scaling-of-the-inputs}
+
+\subsubsection{11.5.4 Number of Hidden Units and
+Layers}\label{number-of-hidden-units-and-layers}
+
+\subsubsection{11.5.5 Multiple Minima}\label{multiple-minima}
+
+\subsection{11.6 Example: Simulated Data}\label{example-simulated-data}
+
+\subsection{11.7 Example: ZIP Code Data}\label{example-zip-code-data}
+
+\subsection{11.8 Discussion}\label{discussion}
+
+\subsection{11.9 Bayesian Neural Nets and the NIPS 2003
+Challenge}\label{bayesian-neural-nets-and-the-nips-2003-challenge}
+
+\subsubsection{11.9.1 Bayes, Boosting and
+Bagging}\label{bayes-boosting-and-bagging}
+
+\subsubsection{11.9.2 Performance
+Comparisons}\label{performance-comparisons}
+
+\subsection{11.10 Computational
+Considerations}\label{computational-considerations}
+
+    \section{13 Prototype Methods and
+Nearest-Neighbors}\label{prototype-methods-and-nearest-neighbors}
+
+\subsection{13.1 Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item
+  model free mehtods for classification and pattenr recognition
+\item
+  unstructured =\textgreater{} not useful understanding of
+  features,outcome relationship.
+\item
+  NN for regression OK for lo-dim but in hi-dim bias-var tradeoff ot as
+  good as for classification \#\# 13.2 Prototype Methods
+\item
+  training data (x\_i,g\_i)
+\item
+  prototypes = set of points in feature space with class label {[}1,K{]}
+\item
+  x classified by closest prototype in normalized (feature\_i
+  \textasciitilde{} moments(0,1)) feature space
+\item
+  position prototypes to capture class distribution, good for irregular
+  class boundaries
+\item
+  main challenge is how many prototypes \#\#\# 13.2.1 K-means Clustering
+  \#\#\# 13.2.2 Learning Vector Quantization \#\#\# 13.2.3 Gaussian
+  Mixtures \#\# 13.3 k-Nearest-Neighbor Classifiers \#\#\# 13.3.1
+  Example: A Comparative Study \#\#\# 13.3.2 Example:
+  k-Nearest-Neighbors and Image Scene Classification \#\#\# 13.3.3
+  Invariant Metrics and Tangent Distance \#\# 13.4 Adaptive
+  Nearest-Neighbor Methods \#\#\# 13.4.1 Example \#\#\# 13.4.2 Global
+  Dimension Reduction for Nearest-Neighbors \#\# 13.5 Computational
+  Considerations
+\end{itemize}
+
+    \section{14 Unsupervised Learning}\label{unsupervised-learning}
+
+\subsection{14.1 Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item
+  Supervised learning - Pr(X,Y) = Pr(Y\textbar{}X).Pr(X) , focuses on
+  Pr(Y\textbar{}X)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    location is of main interest: \$ \mu(x) = argmin\_\{\hat{Y}\}
+    E\_\{Y\textbar{}X\}L(Y,\hat{Y}) \$
+  \item
+    cross validated
+  \end{itemize}
+\item
+  Unsupervised learning - estimate Pr(X)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    often high dimensional with more than location estimates.
+  \item
+    can't validate
+  \item
+    when p\textless{}=3 there are some nonparametric methods which work
+  \end{itemize}
+\end{itemize}
+
+\subsection{14.2 Association Rules}\label{association-rules}
+
+\begin{itemize}
+\tightlist
+\item
+  find conjunctive rules in speical case of very high dimensional binary
+  valued data
+\item
+  find joint values of X which occur frequently usually where \$
+  X\_\{j\} \in {0,1} \$
+\item
+  seek regions of X-space (or prototype X-values v\_\{1\},...v\_\{L\})
+  which are high probability relaitve to support
+\item
+  generally for \$ X\_\{j\} \in S\_\{j\} \$ (its support) and \$
+  s\_\{j\} \subset S\_\{j\} \$ conjunctive rule is to find \(s_{j}\)
+  with large \$ Pr {[}\{\bigcap\}\emph{\{i=0\}\^{}k ( X}\{j\}
+  \in s\_\{j\} ){]}\$
+\end{itemize}
+
+\subsubsection{14.2.1 Market Basket
+Analysis}\label{market-basket-analysis}
+
+\begin{itemize}
+\tightlist
+\item
+  for large databases (\$ p \approx 10\^{}\{4\} N \approx 10\^{}8 \$)
+  need to simplify:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    consider only 2 types of subset:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \(S_{j}\) consists of single value of X\_\{j\}:
+      \(S_{j} = v_{0j}\), or
+    \item
+      \(S_{j}\) consists of all values of X\_\{j\} can assume:
+      \(s_{j} = S_{j}\)
+    \end{itemize}
+  \item
+    simplies to finding \(J \in {1,..p}\) and corresponding \$v\_\{0j\},
+    j \in J \$ s.t.\$ Pr{[} \{\bigcap\}\emph{\{j \in J\} (X}\{j\} =
+    v\_\{0j\}) {]} \$ is large.
+  \item
+    using \emph{dummy variables} to transform into binary variables
+    \(Z_{1}..Z_{K}\) where \$ K = \sum\emph{\{j=1\}\^{}\{p\} =
+    \textbar{}S}\{j\}\textbar{} \$ .
+  \item
+    find \emph{item set} \$ K \in {1,..K} \$ s.t. \$Pr {[}
+    \prod\emph{\{k \in K\}X}\{k\} = 1 {]} \approx \frac{1}{N}
+    \sum\_\{i=1\}\^{}\{N\}\prod\emph{\{k \in K\} z}\{ik\} \$ is large.
+  \end{itemize}
+\end{itemize}
+
+\subsubsection{14.2.2 The Apriori
+Algorithm}\label{the-apriori-algorithm}
+
+\subsubsection{14.2.3 Example: Market Basket
+Analysis}\label{example-market-basket-analysis}
+
+\subsubsection{14.2.4 Unsupervised as Supervised
+Learning}\label{unsupervised-as-supervised-learning}
+
+\begin{itemize}
+\item
+  transform density estimation into supervised function approximation
+\item
+  g(x) is unknown probability density to be estimated
+\item
+  \(g_{0}(x)\) is a reference density e.g. uniform
+\item
+  \(x_{1} ..x_{N}\) are i.i.d. random sample drawn from g(x)
+\item
+  draw \(N_{0}\) size sample from \(g_{0}(x)\)
+\item
+  use mixture density \((g(x)+g_{0}(x))/2\)
+\item ~
+  \subsubsection{14.2.5 Generalized Association
+  Rules}\label{generalized-association-rules}
+
+  \subsubsection{14.2.6 Choice of Supervised Learning
+  Method}\label{choice-of-supervised-learning-method}
+
+  \subsubsection{14.2.7 Example: Market Basket Analysis
+  (Continued)}\label{example-market-basket-analysis-continued}
+
+  \subsection{14.3 Cluster Analysis}\label{cluster-analysis}
+
+  \subsubsection{14.3.1 Proximity Matrices}\label{proximity-matrices}
+
+  \subsubsection{14.3.2 Dissimilarities Based on
+  Attributes}\label{dissimilarities-based-on-attributes}
+
+  \subsubsection{14.3.3 Object
+  Dissimilarity}\label{object-dissimilarity}
+
+  \subsubsection{14.3.4 Clustering
+  Algorithms}\label{clustering-algorithms}
+
+  \subsubsection{14.3.5 Combinatorial
+  Algorithms}\label{combinatorial-algorithms}
+
+  \subsubsection{14.3.6 K-means}\label{k-means}
+
+  \subsubsection{14.3.7 Gaussian Mixtures as Soft K-means
+  Clustering}\label{gaussian-mixtures-as-soft-k-means-clustering}
+
+  \subsubsection{14.3.8 Example: Human Tumor Microarray
+  Data}\label{example-human-tumor-microarray-data}
+
+  \subsubsection{14.3.9 Vector Quantization}\label{vector-quantization}
+
+  \subsubsection{14.3.10 K-medoids}\label{k-medoids}
+
+  \subsubsection{14.3.11 Practical Issues}\label{practical-issues}
+
+  \subsubsection{14.3.12 Hierarchical
+  Clustering}\label{hierarchical-clustering}
+
+  \subsection{14.4 Self-Organizing Maps}\label{self-organizing-maps}
+\end{itemize}
+
+\subsection{14.5 Principal Components, Curves and
+Surfaces}\label{principal-components-curves-and-surfaces}
+
+\begin{itemize}
+\tightlist
+\item
+  sequence of projections of the data, mutually uncorrelated and ordered
+  in variance
+\item
+  PCA as linear manifolds approximating a set of N points
+  \(X_{i} \in p\).
+\end{itemize}
+
+\subsubsection{14.5.1 Principal Components}\label{principal-components}
+
+\subsubsection{14.5.2 Principal Curves and
+Surfaces}\label{principal-curves-and-surfaces}
+
+\subsubsection{14.5.3 Spectral Clustering}\label{spectral-clustering}
+
+\subsubsection{14.5.4 Kernel Principal
+Components}\label{kernel-principal-components}
+
+\subsubsection{14.5.5 Sparse Principal
+Components}\label{sparse-principal-components}
+
+\subsection{14.6 Non-negative Matrix
+Factorization}\label{non-negative-matrix-factorization}
+
+\subsubsection{14.6.1 Archetypal Analysis}\label{archetypal-analysis}
+
+\subsection{14.7 Independent Component Analysis and Exploratory
+Projection
+Pursuit}\label{independent-component-analysis-and-exploratory-projection-pursuit}
+
+\subsubsection{14.7.1 Latent Variables and Factor
+Analysis}\label{latent-variables-and-factor-analysis}
+
+\subsubsection{14.7.2 Independent Component
+Analysis}\label{independent-component-analysis}
+
+\subsubsection{14.7.3 Exploratory Projection
+Pursuit}\label{exploratory-projection-pursuit}
+
+\subsubsection{14.7.4 A Direct Approach to
+ICA}\label{a-direct-approach-to-ica}
+
+\subsection{14.8 Multidimensional
+Scaling}\label{multidimensional-scaling}
+
+\subsection{14.9 Nonlinear Dimension Reduction and Local
+Multidimensional
+Scaling}\label{nonlinear-dimension-reduction-and-local-multidimensional-scaling}
+
+\subsection{14.10 The Google PageRank
+Algorithm}\label{the-google-pagerank-algorithm}
+
+    \section{15 Random Forests}\label{random-forests}
+
+\subsection{15.1 Introduction}\label{introduction}
+
+\subsection{15.2 Definition of Random
+Forests}\label{definition-of-random-forests}
+
+\subsection{15.3 Details of Random
+Forests}\label{details-of-random-forests}
+
+\subsubsection{15.3.1 Out of Bag Samples}\label{out-of-bag-samples}
+
+\subsubsection{15.3.2 Variable Importance}\label{variable-importance}
+
+\subsubsection{15.3.3 Proximity Plots}\label{proximity-plots}
+
+\subsubsection{15.3.4 Random Forests and
+Overfitting}\label{random-forests-and-overfitting}
+
+\subsection{15.4 Analysis of Random
+Forests}\label{analysis-of-random-forests}
+
+\subsubsection{15.4.1 Variance and the De-Correlation
+Effect}\label{variance-and-the-de-correlation-effect}
+
+\subsubsection{15.4.2 Bias}\label{bias}
+
+\subsubsection{15.4.3 Adaptive Nearest
+Neighbors}\label{adaptive-nearest-neighbors}
+
+    \section{16 Ensemble Learning}\label{ensemble-learning}
+
+\begin{itemize}
+\tightlist
+\item
+  Combine base models
+\item
+  Bagging and random forests are ensemble classification methods where
+  committee of trees each vote.
+\item
+  Boosting is similar but \#\# 16.1 \#\# 16.2 Boosting and
+  Regularization Paths \#\#\# 16.2.1 Penalized Regression \#\#\# 16.2.2
+  The ``Bet on Sparsity'' Principle \#\#\# 16.2.3 Regularization Paths,
+  Over-fitting and Margins \#\# 16.3 Learning Ensembles \#\#\# 16.3.1
+  Learning a Good Ensemble \#\#\# 16.3.2 Rule Ensembles
+\end{itemize}
+
+    \section{17 Undirected Graphical
+Models}\label{undirected-graphical-models}
+
+\subsection{17.1 Introduction}\label{introduction}
+
+\begin{itemize}
+\tightlist
+\item
+  also called \emph{Markov fields} or \emph{Markov networks}
+\item
+  each node is an RV, no edge between nodes \textasciitilde{} RV's
+  conditionally indep given the other nodes.
+\item
+  edges parameterized by potentials
+\item
+  model selection == graph structure
+\item
+  learning == estimation of the edge parameters from data
+\item
+  inference == computation of marginal node probabilities, from their
+  joint distribution.
+\item
+  Bayseian networks == DAGs. Distributions can be factored into
+  conditionals =\textgreater{} casual interpretations. \#\# 17.2 Markov
+  Graphs and Their Properties \#\# 17.3 Undirected Graphical Models for
+  Continuous Variables \#\#\# 17.3.1 Estimation of the Parameters when
+  the Graph Structure is Known \#\#\# 17.3.2 Estimation of the Graph
+  Structure \#\#\# 17.4 Undirected Graphical Models for Discrete
+  Variables \#\#\#\# 17.4.1 Estimation of the Parameters when the Graph
+  Structure is Known \#\#\#\# 17.4.2 Hidden Nodes \#\#\#\# 17.4.3
+  Estimation of the Graph Structure \#\#\#\# 17.4.4 Restricted Boltzmann
+  Machines
+\end{itemize}
+
+    \section{18 High-Dimensional Problems: p ≫
+N}\label{high-dimensional-problems-p-n}
+
+\subsection{18.1 When p is Much Bigger than
+N}\label{when-p-is-much-bigger-than-n}
+
+\begin{itemize}
+\tightlist
+\item
+  high variance and overfitting =\textgreater{} simple highly
+  regularized fitting
+\end{itemize}
+
+\subsection{18.2 Diagonal Linear Discriminant Analysis and Nearest
+Shrunken
+Centroids}\label{diagonal-linear-discriminant-analysis-and-nearest-shrunken-centroids}
+
+\subsection{18.3 Linear Classifiers with Quadratic
+Regularization}\label{linear-classifiers-with-quadratic-regularization}
+
+\subsubsection{18.3.1 Regularized Discriminant
+Analysis}\label{regularized-discriminant-analysis}
+
+\subsubsection{18.3.2 Logistic Regression with Quadratic
+Regularization}\label{logistic-regression-with-quadratic-regularization}
+
+\subsubsection{18.3.3 The Support Vector
+Classifier}\label{the-support-vector-classifier}
+
+\subsubsection{18.3.4 Feature Selection}\label{feature-selection}
+
+\subsubsection{18.3.5 Computational Shortcuts When p ≫
+N}\label{computational-shortcuts-when-p-n}
+
+\subsection{18.4 Linear Classifiers with L1
+Regularization}\label{linear-classifiers-with-l1-regularization}
+
+\subsubsection{18.4.1 Application of Lasso to Protein Mass
+Spectroscopy}\label{application-of-lasso-to-protein-mass-spectroscopy}
+
+\subsubsection{18.4.2 The Fused Lasso for Functional
+Data}\label{the-fused-lasso-for-functional-data}
+
+\subsection{18.5 Classification When Features are
+Unavailable}\label{classification-when-features-are-unavailable}
+
+\subsubsection{18.5.1 Example: String Kernels and Protein
+Classification}\label{example-string-kernels-and-protein-classification}
+
+\subsubsection{18.5.2 Classification and Other Models Using
+Inner-Product Kernels and Pairwise
+Distances}\label{classification-and-other-models-using-inner-product-kernels-and-pairwise-distances}
+
+\subsubsection{18.5.3 Example: Abstracts
+Classification}\label{example-abstracts-classification}
+
+\subsection{18.6 High-Dimensional Regression: Supervised Principal
+Components}\label{high-dimensional-regression-supervised-principal-components}
+
+\subsubsection{18.6.1 Connection to Latent-Variable
+Modeling}\label{connection-to-latent-variable-modeling}
+
+\subsubsection{18.6.2 Relationship with Partial Least
+Squares}\label{relationship-with-partial-least-squares}
+
+\subsubsection{18.6.3 Pre-Conditioning for Feature
+Selection}\label{pre-conditioning-for-feature-selection}
+
+\subsection{18.7 Feature Assessment and the Multiple-Testing
+Problem}\label{feature-assessment-and-the-multiple-testing-problem}
+
+\subsubsection{18.7.1 The False Discovery
+Rate}\label{the-false-discovery-rate}
+
+\subsubsection{18.7.2 Asymmetric Cutpoints and the SAM
+Procedure}\label{asymmetric-cutpoints-and-the-sam-procedure}
+
+\subsubsection{18.7.3 A Bayesian Interpretation of the
+FDR}\label{a-bayesian-interpretation-of-the-fdr}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{k}{def} \PY{n+nf}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{styles} \PY{o}{=} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../styles/custom.css}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+            \PY{k}{return} \PY{n}{HTML}\PY{p}{(}\PY{n}{styles}\PY{p}{)}
+        \PY{n}{css\PYZus{}styling}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

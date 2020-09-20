@@ -1,0 +1,395 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.20.2 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Word embedding models - MM</title>
+<meta name="description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+
+
+  <meta name="author" content="First Lastname">
+  
+
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="MM">
+<meta property="og:title" content="Word embedding models">
+<meta property="og:url" content="http://localhost:4000/doc/nlp/word-embedding-models/">
+
+
+  <meta property="og:description" content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.">
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/doc/nlp/word-embedding-models/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": null,
+      "url": "http://localhost:4000/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="MM Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--default">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          MM
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/posts/">Posts</a>
+            </li><li class="masthead__menu-item">
+              <a href="/categories/">Categories</a>
+            </li><li class="masthead__menu-item">
+              <a href="/tags/">Tags</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
+            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
+          </svg>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      <h1 id="word-embedding-models">Word embedding models</h1>
+
+<p>Neural network word embeddings versus traditional count-based distributional models. Copied from <a href="https://github.com/Hironsan/awesome-embedding-models">here</a></p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+  <li><strong><a href="#papers">Papers</a></strong></li>
+  <li><strong><a href="#researchers">Researchers</a></strong></li>
+  <li><strong><a href="#courses-and-lectures">Courses and Lectures</a></strong></li>
+  <li><strong><a href="#datasets">Datasets</a></strong></li>
+  <li><strong><a href="#implementations-and-tools">Implementations and Tools</a></strong></li>
+</ul>
+
+<h3 id="existing-training-sets-of-word2vec">Existing training sets of word2vec</h3>
+
+<ul>
+  <li><a href="https://code.google.com/archive/p/word2vec/">Original</a></li>
+  <li><a href="https://github.com/Kyubyong/wordvectors">Multilingual</a></li>
+  <li><a href="https://sites.google.com/site/rmyeid/projects/polyglot">Another multilingual</a></li>
+  <li><a href="https://github.com/icoxfog417/fastTextJapaneseTutorial">Fasttext by mikolov</a></li>
+  <li><a href="https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/">Levy dependency based word embeddings - good for syntactic simialrity</a></li>
+  <li><a href="http://cistern.cis.lmu.de/meta-emb/">meta-embeddings</a></li>
+  <li><a href="http://nlp.stanford.edu/projects/glove/">Standford Glove</a></li>
+  <li><a href="https://github.com/alexandres/lexvec">Lexvec</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Word2vec">word2vec</a></li>
+  <li><a href="https://ai2-s2-pdfs.s3.amazonaws.com/156c/f06f920a98152668dd17a43fde9c68fc0d9b.pdf">Computation of Normalized Edit Distance and Applications</a></li>
+</ul>
+
+<h2 id="papers">Papers</h2>
+<p><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=">All papers</a></p>
+
+<h3 id="word-embeddings">Word Embeddings</h3>
+
+<h4 id="standard---word2vec-glove-fasttext">Standard - Word2vec, GloVe, FastText</h4>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=efficient-estimation-of-word-representations.pdf">Efficient Estimation of Word Representations in Vector Space (2013), T. Mikolov et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=distributed-representations-of-words.pdf">Distributed Representations of Words and Phrases and their Compositionality (2013), T. Mikolov et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1411.2738.pdf">word2vec Parameter Learning Explained (2014), Xin Rong</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1402.3722.pdf">word2vec Explained: deriving Mikolov et al.’s negative-sampling word-embedding method (2014), Yoav Goldberg, Omer Levy</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=glove.pdf">GloVe: Global Vectors for Word Representation (2014), J. Pennington et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=HuangACL12.pdf">Improving Word Representations via Global Context and Multiple Word Prototypes (2012), EH Huang et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1607.04606v1.pdf">Enriching Word Vectors with Subword Information (2016), P. Bojanowski et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1607.01759.pdf">Bag of Tricks for Efficient Text Classification (2016), A. Joulin et al.</a></li>
+</ul>
+
+<h4 id="embedding-enhancement">Embedding Enhancement</h4>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F/1411.4166.pdf">Retrofitting Word Vectors to Semantic Lexicons (2014), M. Faruqui et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=conll13_morpho.pdf">Better Word Representations with Recursive Neural Networks for Morphology (2013), T.Luong et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=dependency-based-word-embeddings-acl-2014.pdf">Dependency-Based Word Embeddings (2014), Omer Levy, Yoav Goldberg</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1410.0718.pdf">Not All Neural Embeddings are Born Equal (2014), F. Hill et al.</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=naacl2015.pdf">Two/Too Simple Adaptations of Word2Vec for Syntax Problems (2015), W. Ling</a></li>
+</ul>
+
+<h4 id="comparing-count-based-vs-predict-based-method">Comparing count-based vs predict-based method</h4>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=conll2014analogies.pdf">Linguistic Regularities in Sparse and Explicit Word Representations (2014), Omer Levy, Yoav Goldberg</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=P14-1023.pdf">Don’t count, predict! A systematic comparison of context-counting vs. context-predicting semantic vectors (2014), M. Baroni</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=Q15-1016.pdf">Improving Distributional Similarity with Lessons Learned from Word Embeddings (2015), Omer Levy</a></li>
+</ul>
+
+<p><strong>Evaluation, Analysis</strong></p>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=D15-1036.pdf">Evaluation methods for unsupervised word embeddings (2015), T. Schnabel</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=W16-2501.pdf">Intrinsic Evaluation of Word Vectors Fails to Predict Extrinsic Performance (2016), B. Chiu</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1605.02276.pdf">Problems With Evaluation of Word Embeddings Using Word Similarity Tasks (2016), M. Faruqui</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1611.03641.pdf">Improving Reliability of Word Similarity Evaluation by Redesigning Annotation Task and Performance Measure (2016), Oded Avraham, Yoav Goldberg</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=2016-acl-veceval.pdf">Evaluating Word Embeddings Using a Representative Suite of Practical Tasks (2016), N. Nayak</a></li>
+</ul>
+
+<h3 id="phrase-sentence-and-document-embeddings">Phrase, Sentence and Document Embeddings</h3>
+
+<p><strong>Sentence</strong></p>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1506.06726.pdf">Skip-Thought Vectors</a></li>
+</ul>
+
+<p><strong>Document</strong></p>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=1405.4053">Distributed Representations of Sentences and Documents</a></li>
+</ul>
+
+<h3 id="sense-embeddings">Sense Embeddings</h3>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=ACL_2015_Iacobaccietal.pdf">SENSEMBED: Learning Sense Embeddings for Word and Relational Similarity</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=reisinger.naacl-2010.pdf">Multi-Prototype Vector-Space Models of Word Meaning</a></li>
+</ul>
+
+<h3 id="neural-language-models">Neural Language Models</h3>
+
+<ul>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=mikolov_interspeech2010_IS100722.pdf">Recurrent neural network based language model</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=bengio03a.pdf">A Neural Probabilistic Language Model</a></li>
+  <li><a href="https://www.dropbox.com/sh/rfs43j74dcqv76v/AACxd4gWlIfa38caWjXPXs1pa?dl=0%2F&amp;preview=N13-1090.pdf">Linguistic Regularities in Continuous Space Word Representations</a></li>
+</ul>
+
+<h2 id="researchers">Researchers</h2>
+
+<ul>
+  <li><a href="https://scholar.google.co.jp/citations?user=oBu8kMMAAAAJ&amp;hl=en">Tomas Mikolov</a></li>
+  <li><a href="https://scholar.google.co.jp/citations?user=kukA0LcAAAAJ&amp;hl=en">Yoshua Bengio</a></li>
+  <li><a href="https://scholar.google.co.jp/citations?user=0rskDKgAAAAJ&amp;hl=en">Yoav Goldberg</a></li>
+  <li><a href="https://scholar.google.co.jp/citations?user=PZVd2h8AAAAJ&amp;hl=en">Omer Levy</a></li>
+  <li><a href="https://scholar.google.co.jp/citations?user=TKvd_Z4AAAAJ&amp;hl=en">Kai Chen</a></li>
+</ul>
+
+<h2 id="courses-and-lectures">Courses and Lectures</h2>
+
+<ul>
+  <li><a href="http://cs224d.stanford.edu/index.html">CS224d: Deep Learning for Natural Language Processing</a></li>
+  <li><a href="https://www.udacity.com/course/deep-learning--ud730">Udacity Deep Learning</a></li>
+</ul>
+
+<h2 id="datasets">Datasets</h2>
+<h3 id="training">Training</h3>
+
+<ul>
+  <li><a href="https://dumps.wikimedia.org/enwiki/">Wikipedia</a></li>
+  <li><a href="http://www.socher.org/index.php/Main/ImprovingWordRepresentationsViaGlobalContextAndMultipleWordPrototypes">WestburyLab.wikicorp.201004</a></li>
+</ul>
+
+<h3 id="evaluation">Evaluation</h3>
+
+<ul>
+  <li><a href="https://www.cs.york.ac.uk/semeval-2012/task2.html">SemEval-2012 Task 2</a></li>
+  <li><a href="http://www.cs.technion.ac.il/~gabr/resources/data/wordsim353/">WordSimilarity-353</a></li>
+  <li><a href="http://www.socher.org/index.php/Main/ImprovingWordRepresentationsViaGlobalContextAndMultipleWordPrototypes">Stanford’s Contextual Word Similarities (SCWS)</a></li>
+  <li><a href="http://stanford.edu/~lmthang/morphoNLM/">Stanford Rare Word (RW) Similarity Dataset</a></li>
+</ul>
+
+<h3 id="pre-trained-word-vectors">Pre-Trained Word Vectors</h3>
+<p>Convenient downloader for pre-trained word vectors:</p>
+<ul>
+  <li><a href="https://github.com/chakki-works/chakin">chakin</a></li>
+</ul>
+
+<p>Links for pre-trained word vectors:</p>
+<ul>
+  <li><a href="https://code.google.com/archive/p/word2vec/">Word2vec pretrained vector(English Only)</a></li>
+  <li><a href="https://github.com/Kyubyong/wordvectors">Word2vec pretrained vectors for 30+ languages</a></li>
+  <li><a href="https://github.com/facebookresearch/fastText/blob/master/pretrained-vectors.md">FastText pretrained vectors for 90 languages</a></li>
+  <li><a href="https://drive.google.com/open?id=0ByFQ96A4DgSPUm9wVWRLdm5qbmc">FastText pretrained vector for Japanese with NEologd</a></li>
+  <li><a href="http://nlp.stanford.edu/projects/glove/">word vectors trained by GloVe</a></li>
+  <li><a href="https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/">Dependency-Based Word Embeddings</a></li>
+  <li><a href="http://cistern.cis.lmu.de/meta-emb/">Meta-Embeddings</a></li>
+  <li><a href="https://github.com/alexandres/lexvec">Lex-Vec</a></li>
+  <li><a href="http://stanford.edu/~lmthang/morphoNLM/">Huang et al. (2012)’s embeddings (HSMN+csmRNN)</a></li>
+  <li><a href="http://stanford.edu/~lmthang/morphoNLM/">Collobert et al. (2011)’s embeddings (CW+csmRNN)</a></li>
+  <li><a href="https://github.com/bheinzerling/bpemb">BPEmb: subword embeddings for 275 languages</a></li>
+</ul>
+
+<h2 id="implementations-and-tools">Implementations and Tools</h2>
+<h3 id="word2vec">Word2vec</h3>
+
+<ul>
+  <li><a href="https://code.google.com/archive/p/word2vec/">Original</a></li>
+  <li><a href="https://radimrehurek.com/gensim/models/word2vec.html">gensim</a></li>
+  <li><a href="https://www.tensorflow.org/versions/r0.12/tutorials/word2vec/index.html">TensorFlow</a></li>
+</ul>
+
+<h3 id="glove">GloVe</h3>
+
+<ul>
+  <li><a href="https://github.com/stanfordnlp/GloVe">Original</a></li>
+</ul>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+          <li><a href="https://twitter.com/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+        
+      
+        
+          <li><a href="https://github.com/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+        
+      
+        
+          <li><a href="https://instagram.com/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-instagram" aria-hidden="true"></i> Instagram</a></li>
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2020 MM. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

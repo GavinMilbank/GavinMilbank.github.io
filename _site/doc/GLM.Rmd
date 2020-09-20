@@ -1,0 +1,18 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+https://en.wikipedia.org/wiki/Heteroscedasticity
+
+## Generalized Linear Models
+
+https://en.wikipedia.org/wiki/Generalized_linear_model
+
+- Unify linear regression, logistic regression and Poisson regression
+-  They proposed an iteratively reweighted least squares method for maximum likelihood estimation of the model parameters.
+
+## 
+
+
+
+
